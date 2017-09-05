@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SampleHorse.Core;
+using SampleHorse.Core.Async;
 using SampleHorse.Core.Delegates;
 using SampleHorse.Core.Strings;
 
@@ -34,6 +35,9 @@ namespace SampleHorse.ConsoleApp
 
             var ls = new Core.LINQ.LinqSamples(); //Please see the namespaces SampleHorse is not required. This class and LinqSamples has common namesapce base
             ls.DoSomethingWithJoin();
+
+            var asyncS = new AsyncSample();
+            asyncS.Logic();
 
             Console.ReadKey();
         }

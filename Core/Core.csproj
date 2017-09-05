@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Async\LockingSample.cs" />
+    <Compile Include="Async\AsyncSample.cs" />
+    <Compile Include="Async\Singleton.cs" />
     <Compile Include="Attributes\Attributes.cs" />
     <Compile Include="Collections\ThreadSafeCollection.cs" />
     <Compile Include="Collections\UsingCollections.cs" />
