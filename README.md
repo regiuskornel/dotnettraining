@@ -1,2 +1,2 @@
-# dotnettraning
-Dotnet traning samples
+# dotnet training
+Dotnet training samples
