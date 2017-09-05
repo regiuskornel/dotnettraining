@@ -1,0 +1,2 @@
+# dotnettraning
+Dotnet traning samples
