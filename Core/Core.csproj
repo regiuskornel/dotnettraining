@@ -64,9 +64,11 @@
     <Compile Include="Strings\ProduceString.cs" />
     <Compile Include="Strings\StringParser.cs" />
     <Compile Include="Types\Abstracts.cs" />
+    <Compile Include="Types\AnonymousType.cs" />
     <Compile Include="Types\ClassValueStruct.cs" />
     <Compile Include="Compare\Compares - Final.cs" />
     <Compile Include="Compare\Compares.cs" />
+    <Compile Include="Types\DynamicType.cs" />
     <Compile Include="Types\ExtensionMethods.cs" />
     <Compile Include="Generics\GenericTypes.cs" />
     <Compile Include="Types\Inheritance.cs" />

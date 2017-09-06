@@ -24,6 +24,8 @@ namespace SampleHorse.Core.LINQ
             IEnumerable<string> namesOnly = devices.Select(device => device.Name);
             List<string> namesOnlyList = devices.Select(device => device.Name).ToList();
             var namesOnlyArray = devices.Select(device => device.Name).ToArray();
+            //Anonymous type
+            var names2 = devices.Select(device => new {DeviceName = device.Name }).ToArray();
 
             //Ordered list of devices
             var orderedList = devices.OrderBy(device => device.Name).ToList();
