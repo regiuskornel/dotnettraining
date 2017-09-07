@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
-using System.Runtime.CompilerServices;
 
 namespace SampleHorse.Core.LINQ
 {
@@ -23,36 +21,37 @@ namespace SampleHorse.Core.LINQ
             //Get only names from devices.
             IEnumerable<string> namesOnly = devices.Select(device => device.Name);
             List<string> namesOnlyList = devices.Select(device => device.Name).ToList();
-            var namesOnlyArray = devices.Select(device => device.Name).ToArray();
+            string[] namesOnlyArray = devices.Select(device => device.Name).ToArray();
+            
             //Anonymous type
             var names2 = devices.Select(device => new {DeviceName = device.Name }).ToArray();
 
             //Ordered list of devices
-            var orderedList = devices.OrderBy(device => device.Name).ToList();
-            var orderedList2 = devices
-                .OrderByDescending(device => device.Name)
-                .ThenBy(device => device.Id).ToList();
+            List<Device> orderedList = devices.OrderBy(device => device.Name).ToList();
+            List<Device> orderedList2 = devices
+                                        .OrderByDescending(device => device.Name)
+                                        .ThenBy(device => device.Id).ToList();
 
             //Last 2 items
-            var last2ItemList = devices
-                .OrderByDescending(device => device.Name)
-                .Take(2).ToList();
+            List<Device> last2ItemList = devices
+                                        .OrderByDescending(device => device.Name)
+                                        .Take(2).ToList();
 
             //2 items after 2.
-            var first2ItemList = devices
-                .OrderBy(device => device.Name)
-                .Skip(2)
-                .Take(2)
-                .ToList();
+            List<Device> first2ItemList = devices
+                                        .OrderBy(device => device.Name)
+                                        .Skip(2)
+                                        .Take(2)
+                                        .ToList();
 
             //Lookup
             Device d1 = devices.First(d => d.Id == 3);
             Device d2 = devices.FirstOrDefault(d => d.Id == 99); //Not exists
 
             //Collect
-            var nameHasE = devices.Where(d => d.Name.Contains('e'));
-            var nameHasEOrderedList = nameHasE.OrderBy(d => d.Name); //Link
-            var finalList = nameHasEOrderedList.ToList(); //Two previous lines are executed here.
+            IEnumerable<Device> nameHasE = devices.Where(d => d.Name.Contains('e'));
+            IOrderedEnumerable<Device> nameHasEOrderedList = nameHasE.OrderBy(d => d.Name); //Link
+            List<Device> finalList = nameHasEOrderedList.ToList(); //Two previous lines are executed here.
 
             //Intersect collections
             List<Device> otherList = new List<Device>()
@@ -60,7 +59,8 @@ namespace SampleHorse.Core.LINQ
                 new Device(2, "Hummidity"),
                 new Device(4, "Vibration"),
             };
-            var commonList = devices.Intersect(otherList);
+
+             var commonList = devices.Intersect(otherList).ToList();
 
             //....
         }
@@ -113,7 +113,9 @@ namespace SampleHorse.Core.LINQ
         }
     }
 
-
+    /// <summary>
+    /// Immutable device
+    /// </summary>
     internal class Device
     {
         public int Id { get; }

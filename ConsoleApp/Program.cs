@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SampleHorse.Core;
 using SampleHorse.Core.Async;
 using SampleHorse.Core.Delegates;
@@ -37,7 +33,7 @@ namespace SampleHorse.ConsoleApp
             ls.DoSomethingWithJoin();
 
             var asyncS = new AsyncSample();
-            asyncS.Logic();
+            asyncS.DoSomething();
 
             Console.ReadKey();
         }

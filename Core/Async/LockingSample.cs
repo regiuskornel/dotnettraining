@@ -12,6 +12,7 @@ namespace SampleHorse.Core.Async
     public class LockingSample
     {
         private long allDownloaded;
+        public static object lockObj = new object();
 
         public void Logic()
         {
@@ -19,16 +20,14 @@ namespace SampleHorse.Core.Async
 
             var tasks = new List<Task>(); //Task is a base of generic Task<int> which is used
             tasks.Add(DoSomethingAsync(@"https://en.wikipedia.org/wiki/Main_Page#/media/File:Voyager.jpg"));
-
             tasks.Add(DoSomethingAsync(@"https://en.wikipedia.org/wiki/Main_Page#/media/File:Liquid_oxygen_in_a_beaker_(cropped_and_retouched).jpg"));
-
             tasks.Add(DoSomethingAsync(@"https://en.wikipedia.org/wiki/Artificial_intelligence#/media/File:Complex_systems_organizational_map.jpg"));
 
             sw.Stop();
-            Console.WriteLine("Elapsed so far : {0} ms",sw.ElapsedMilliseconds);
+            Console.WriteLine("Elapsed so far : {0} ms", sw.ElapsedMilliseconds);
             sw.Restart();
 
-            CancellationTokenSource ct = new CancellationTokenSource(100); //Starts a timer with 100ms timeout.
+            CancellationTokenSource ct = new CancellationTokenSource(1000); //Starts a timer with 1000ms timeout.
             //Wait all task to be completed
             Task.WaitAll(tasks.ToArray(), ct.Token);
 
@@ -45,29 +44,31 @@ namespace SampleHorse.Core.Async
             {
                 var uri = new Uri(url);
                 var image1 = await webReq.DownloadDataTaskAsync(uri);
-                int downloaded= image1.Length;
+                int downloadedBytes = image1.Length;
 
                 //This is a problem:
-                allDownloaded += downloaded;
+                //allDownloaded += downloaded;
 
-                //Version 1 using lock
-
-
+                //Version 1 using lock (bad approach at this point)
+                lock (lockObj)
+                {
+                    allDownloaded += downloadedBytes;
+                }
+                
                 //Version 2 using interlock
-                //Interlocked.Add(ref this.allDownloaded, downloaded);
+                Interlocked.Add(ref this.allDownloaded, downloadedBytes);
 
-                return downloaded;
+                return downloadedBytes;
             }
         }
-
-
+        
 
         private Task<int> DoSomethingWoAsync(string url)
         {
             using (var webReq = new WebClient())
             {
                 var uri = new Uri(url);
-                Task<byte[]> imageTask =  webReq.DownloadDataTaskAsync(uri);
+                Task<byte[]> imageTask = webReq.DownloadDataTaskAsync(uri);
                 Task<int> resultTask = imageTask.ContinueWith(task => task.Result.Length);
                 return resultTask;
             }
