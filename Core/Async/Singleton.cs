@@ -56,7 +56,8 @@ namespace SampleHorse.Core.Async
     public class LazySingleton
     {
         private static readonly Lazy<LazySingleton> InternalInstance =
-            new Lazy<LazySingleton>(() => new LazySingleton(), LazyThreadSafetyMode.PublicationOnly);
+            new Lazy<LazySingleton>(() => new LazySingleton(), 
+                LazyThreadSafetyMode.PublicationOnly);
 
         public static LazySingleton Instance => InternalInstance.Value;
 

@@ -20,6 +20,7 @@ namespace SampleHorse.Core.LINQ
         {
             //Get only names from devices.
             IEnumerable<string> namesOnly = devices.Select(device => device.Name);
+        
             List<string> namesOnlyList = devices.Select(device => device.Name).ToList();
             string[] namesOnlyArray = devices.Select(device => device.Name).ToArray();
             
@@ -50,8 +51,8 @@ namespace SampleHorse.Core.LINQ
 
             //Collect
             IEnumerable<Device> nameHasE = devices.Where(d => d.Name.Contains('e'));
-            IOrderedEnumerable<Device> nameHasEOrderedList = nameHasE.OrderBy(d => d.Name); //Link
-            List<Device> finalList = nameHasEOrderedList.ToList(); //Two previous lines are executed here.
+            nameHasE = nameHasE.OrderBy(d => d.Name); //Link
+            List<Device> finalList = nameHasE.ToList(); //Two previous lines are executed here.
 
             //Intersect collections
             List<Device> otherList = new List<Device>()
@@ -67,7 +68,8 @@ namespace SampleHorse.Core.LINQ
 
         public void DoSomethingWithAnonymousType()
         {
-            //Var is variable. This var is not a simplification/replacement for a predefined type
+            //Var is variable.
+            // This var is not a simplification/replacement for a predefined type
             var anonymList = devices.Select(d =>
                 new { NameWithId = $"{d.Id}-{d.Name}" }
             ).ToList();
@@ -93,9 +95,10 @@ namespace SampleHorse.Core.LINQ
                         DeviceName = device.Name,
                         OwnerName = owner.Name
                     })
-                .ToList();
-            
-            //Why impossible?: joined = joined.OrderBy(arg => arg.OwnerName);
+                ;
+
+            //Why impossible?:       
+             joined = joined.OrderBy(arg => arg.OwnerName);
 
             foreach (var anonType in joined.OrderBy(arg => arg.OwnerName))
             {
