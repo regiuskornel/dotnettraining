@@ -7,6 +7,16 @@ using System.Threading.Tasks;
 
 namespace SampleHorse.Core.Types
 {
+    public class Logic2
+    {
+        public void Met()
+        {
+            var sam = new SampleGenericClass<Int32>();
+            var samsClass = new SampleGenericClass<string>();
+
+        }
+    }
+
     class SampleGenericClass<T>
     {
         public T GetById(int id)
@@ -59,7 +69,8 @@ namespace SampleHorse.Core.Types
 
 
     //Advanced co-/contravariance
-    interface ISampleInterface<in TSource, out TResult> : ISampleInterface where TSource: ISampleInterface
+    interface ISampleInterface<in TSource, out TResult> 
+        : ISampleInterface where TSource: ISampleInterface
     {
         void Process(TSource inputParam);
 

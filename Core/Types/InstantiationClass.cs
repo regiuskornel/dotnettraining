@@ -23,7 +23,7 @@ namespace SampleHorse.Core.Types
         private int priv = 30;
 
         //#4
-        InstantiationClass()
+        public InstantiationClass()
         {
             privReadOnly = 10;
             this.priv = 10 * 10;

@@ -27,7 +27,7 @@ namespace SampleHorse.Core.Types
 
         protected virtual void OptionalOverrideMethod()
         {
-
+            //Default
         }
 
         public abstract void MustOverrideMethod();
@@ -35,12 +35,15 @@ namespace SampleHorse.Core.Types
 
     public class SampleImp : SampleBaseClass
     {
-        /*
+        
         protected override void OptionalOverrideMethod()
         {
+            SampleImp b =new SampleImp();
+           
+            int u = 1;
             base.OptionalOverrideMethod();
         }
-        */
+        
 
         public override void MustOverrideMethod()
         {
@@ -48,7 +51,7 @@ namespace SampleHorse.Core.Types
         }
 
         //Avoid if possible!
-        protected new  void CommonImplementation()
+        protected new void CommonImplementation()
         {
 
         }

@@ -45,7 +45,6 @@ namespace SampleHorse.Core
         {
             a = 50; //a local variable copied from aSource
             sst.IntrnalValue = 100; //won't touch sSource.InternalValue
-
             //Check the DateTime is immutable
         }
 
@@ -59,10 +58,10 @@ namespace SampleHorse.Core
             a = 99; //change aSource value as well
         }
 
-        private void AwaitValue(out int aSource)
+        private bool AwaitValue(out int aSource)
         {
             aSource = 8888; //Must set value of 'out' parameter
-            return;
+            return true;
         }
 
         #region Sample types

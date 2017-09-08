@@ -12,8 +12,14 @@ namespace SampleHorse.Core.Types
         private int _backingfield;
         public int Backingfield
         {
-            get { return _backingfield; }
-            set { _backingfield = value; }
+            get
+            {
+                return _backingfield;
+            }
+            set
+            {
+                _backingfield = value;
+            }
         }
 
         //Implementation behind

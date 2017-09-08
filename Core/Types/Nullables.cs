@@ -8,7 +8,8 @@ namespace SampleHorse.Core
 {
     class Nullables
     {
-        public void NullableVariables() {
+        public void NullableVariables()
+        {
             //Wrong: long number = null;
             long? number2 = null;
             number2 = 10;

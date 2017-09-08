@@ -48,7 +48,7 @@ namespace SampleHorse.Core.Delegates
         }
 
         //Works only in C# 7, in Visual studio 2017
-        /*
+        
         public int UsingLocalFunction(string number)
         {
             int Cardinal(string str)
@@ -68,6 +68,6 @@ namespace SampleHorse.Core.Delegates
 
             return Cardinal(number);
         }
-        */
+        
     }
 }
